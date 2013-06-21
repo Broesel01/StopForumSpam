@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
+	<import>
+		<categories>
+			<category name="module.security">
+				<parent>module</parent>
+			</category>
+			
+			<category name="stopforumspam.settings">
+				<parent>security</parent>
+				<options>module_stopforumspam</options>
+				<showorder>1</showorder>
+			</category>
+			
+			<category name="stopforumspam.settings">
+				<parent>security</parent>
+				<options>module_stopforumspam</options>
+			</category>
+			
+			<category name="stopforumspam.generalsettings">
+				<parent>stopforumspam.settings</parent>
+				<showorder>1</showorder>
+			</category>
+			
+			<category name="stopforumspam.scopesettings">
+				<parent>stopforumspam.settings</parent>
+				<showorder>2</showorder>
+			</category>
+			
+			<category name="stopforumspam.blocksettings">
+				<parent>stopforumspam.settings</parent>
+				<showorder>3</showorder>
+			</category>
+			
+			<category name="stopforumspam.advsettings">
+				<parent>stopforumspam.settings</parent>
+				<showorder>4</showorder>
+			</category>
+		</categories>
+
+		<options>
+			<option name="module_stopforumspam">
+				<categoryname>module.security</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			
+			<option name="stopforumspam_checkemailaddress">
+				<categoryname>stopforumspam.generalsettings</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<showorder>2</showorder>
+			</option>
+			
+			<option name="stopforumspam_checkipaddress">
+				<categoryname>stopforumspam.generalsettings</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<showorder>3</showorder>
+			</option>
+			
+			<option name="stopforumspam_whitelist">
+				<categoryname>stopforumspam.generalsettings</categoryname>
+				<optiontype>textarea</optiontype>
+				<defaultvalue>
+					<![CDATA[admin
+127.0.0.1
+admin@localhost]]>
+				</defaultvalue>
+				<showorder>4</showorder>
+			</option>
+
+			<option name="stopforumspam_checkregistration">
+				<categoryname>stopforumspam.scopesettings</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<showorder>1</showorder>
+			</option>
+
+			<option name="stopforumspam_enablenotification">
+				<categoryname>stopforumspam.blocksettings</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<showorder>1</showorder>
+				<enableoptions><![CDATA[stopforumspam_blockmessage]]></enableoptions>
+			</option>
+
+			<option name="stopforumspam_blockmessage">
+				<categoryname>stopforumspam.blocksettings</categoryname>
+				<optiontype>textareaI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<defaultvalue><![CDATA[wcf.acp.option.stopforumspam.defaultblockmessage]]></defaultvalue>
+				<showorder>2</showorder>
+			</option>
+
+			<option name="stopforumspam_denyregistration">
+				<categoryname>stopforumspam.blocksettings</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<showorder>3</showorder>
+			</option>
+
+			<option name="stopforumspam_hidefromml">
+				<categoryname>stopforumspam.blocksettings</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<showorder>4</showorder>
+			</option>
+			
+			<option name="stopforumspam_maxage">
+				<categoryname>stopforumspam.advsettings</categoryname>
+				<optiontype>integer</optiontype>
+				<minvalue>0</minvalue>
+				<maxvalue>365</maxvalue>
+				<defaultvalue>90</defaultvalue>
+				<showorder>1</showorder>
+			</option>
+			
+			<option name="stopforumspam_confidence">
+				<categoryname>stopforumspam.advsettings</categoryname>
+				<optiontype>integer</optiontype>
+				<minvalue>0</minvalue>
+				<maxvalue>100</maxvalue>
+				<defaultvalue>5</defaultvalue>
+				<showorder>2</showorder>
+			</option>
+		</options>
+	</import>
+</data>
