@@ -26,7 +26,7 @@ class RegisterFormStopForumSpamDisclaimerListener implements IEventListener {
 		}
 		
 		// check StopForumSpam disclaimer
-		if (!WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
+		if (defined('STOPFORUMSPAM_ENABLEDISCLAIMER') && STOPFORUMSPAM_ENABLEDISCLAIMER && !WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
 			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('StopForumSpamDisclaimer'));
 			exit;
 		}
