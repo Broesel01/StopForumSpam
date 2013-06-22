@@ -1,12 +1,12 @@
 <?php
 namespace wcf\system\event\listener;
 use wcf\system\event\IEventListener;
-use wcf\system\exception\PermissionDeniedException;
-use wcf\util\StopForumSpam;
-use wcf\util\UserUtil;
+use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 
 /**
- * StopForumSpam integration (registration form)
+ * A disclaimer for StopForumSpam
  * 
  * @author	Sascha Greuel <sascha@softcreatr.de>
  * @copyright	2013 Sascha Greuel
@@ -15,22 +15,20 @@ use wcf\util\UserUtil;
  * @subpackage	system.event.listener
  * @category	Community Framework
  */
-class RegistrationFormStopForumSpamListener implements IEventListener {
+class RegisterFormStopForumSpamDisclaimerListener implements IEventListener {
 	/**
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		/*
-		if (!defined('MODULE_STOPFORUMSPAM') || !MODULE_STOPFORUMSPAM) {
+		// avoid misorder of disclaimer pages
+		if (REGISTER_ENABLE_DISCLAIMER && !WCF::getSession()->getVar('disclaimerAccepted')) {
 			return false;
 		}
-		*/
 		
-		$sfs = new StopForumSpam($eventObj->username, $eventObj->email);
-		$result = $sfs->check();
-		
-		if ($result['spammer'] === true) {
-			throw new PermissionDeniedException();
+		// check StopForumSpam disclaimer
+		if (!WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
+			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('StopForumSpamDisclaimer'));
+			exit;
 		}
 	}
 }

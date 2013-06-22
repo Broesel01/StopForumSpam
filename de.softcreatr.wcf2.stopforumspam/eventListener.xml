@@ -3,15 +3,22 @@
 	<import>
 		<eventlistener>
 			<eventclassname>wcf\form\RegisterForm</eventclassname>
-			<eventname>saved</eventname>
-			<listenerclassname>wcf\system\event\listener\RegistrationFormStopForumSpamListener</listenerclassname>
+			<eventname>readParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\RegisterFormStopForumSpamDisclaimerListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
 		
 		<eventlistener>
 			<eventclassname>wcf\form\RegisterForm</eventclassname>
 			<eventname>validate</eventname>
-			<listenerclassname>wcf\system\event\listener\RegistrationFormStopForumSpamListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\RegisterFormStopForumSpamListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\form\RegisterForm</eventclassname>
+			<eventname>saved</eventname>
+			<listenerclassname>wcf\system\event\listener\RegisterFormStopForumSpamListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
 	</import>

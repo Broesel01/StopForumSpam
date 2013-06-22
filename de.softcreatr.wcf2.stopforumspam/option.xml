@@ -59,15 +59,20 @@
 				<showorder>3</showorder>
 			</option>
 			
-			<option name="stopforumspam_whitelist">
+			<option name="stopforumspam_enabledisclaimer">
 				<categoryname>stopforumspam.generalsettings</categoryname>
-				<optiontype>textarea</optiontype>
-				<defaultvalue>
-					<![CDATA[admin
-127.0.0.1
-admin@localhost]]>
-				</defaultvalue>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
 				<showorder>4</showorder>
+				<enableoptions><![CDATA[stopforumspam_disclaimertext]]></enableoptions>
+			</option>
+			
+			<option name="stopforumspam_disclaimertext">
+				<categoryname>stopforumspam.generalsettings</categoryname>
+				<optiontype>textareaI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<defaultvalue><![CDATA[wcf.acp.option.stopforumspam_defaultdisclaimertext]]></defaultvalue>
+				<showorder>5</showorder>
 			</option>
 
 			<option name="stopforumspam_checkregistration">
@@ -76,12 +81,23 @@ admin@localhost]]>
 				<defaultvalue>1</defaultvalue>
 				<showorder>1</showorder>
 			</option>
+			
+			<option name="stopforumspam_whitelist">
+				<categoryname>stopforumspam.blocksettings</categoryname>
+				<optiontype>textarea</optiontype>
+				<defaultvalue>
+					<![CDATA[admin
+127.0.0.1
+admin@localhost]]>
+				</defaultvalue>
+				<showorder>1</showorder>
+			</option>
 
 			<option name="stopforumspam_enablenotification">
 				<categoryname>stopforumspam.blocksettings</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<showorder>1</showorder>
+				<showorder>2</showorder>
 				<enableoptions><![CDATA[stopforumspam_blockmessage]]></enableoptions>
 			</option>
 
@@ -89,22 +105,22 @@ admin@localhost]]>
 				<categoryname>stopforumspam.blocksettings</categoryname>
 				<optiontype>textareaI18n</optiontype>
 				<supporti18n>1</supporti18n>
-				<defaultvalue><![CDATA[wcf.acp.option.stopforumspam.defaultblockmessage]]></defaultvalue>
-				<showorder>2</showorder>
+				<defaultvalue><![CDATA[wcf.acp.option.stopforumspam_defaultblockmessage]]></defaultvalue>
+				<showorder>3</showorder>
 			</option>
 
 			<option name="stopforumspam_denyregistration">
 				<categoryname>stopforumspam.blocksettings</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
-				<showorder>3</showorder>
+				<showorder>4</showorder>
 			</option>
 
 			<option name="stopforumspam_hidefromml">
 				<categoryname>stopforumspam.blocksettings</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<showorder>4</showorder>
+				<showorder>5</showorder>
 			</option>
 			
 			<option name="stopforumspam_maxage">

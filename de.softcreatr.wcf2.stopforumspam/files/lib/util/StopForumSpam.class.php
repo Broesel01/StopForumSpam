@@ -48,42 +48,49 @@ class StopForumSpam {
 			'f' => 'json'
 		);
 		
-		// Check E-Mail-Address?
-		if (defined('STOPFORUMSPAM_CHECKEMAILADDRESS') && STOPFORUMSPAM_CHECKEMAILADDRESS && !empty($this->email)) {
-			$check[] = 'email';
-			$params['email'] = $this->email;
-		}
-		
-		// Check IP-Address?
-		if (defined('STOPFORUMSPAM_CHECKIPADDRESS') && STOPFORUMSPAM_CHECKIPADDRESS && !empty($this->ip)) {
-			$check[] = 'ip';
-			$params['ip'] = $this->ip;
-		}
-		
-		// Just continue, if there's anything to check
-		if (!empty($check)) {
-			$isChecked = true;
+		// Check, if module is enabled and if the given information is whitelisted
+		if (!defined('MODULE_STOPFORUMSPAM') || !MODULE_STOPFORUMSPAM) {
+			$this->log('wcf.stopforumspam.log.module_disabled');
+		} else if ($this->isWhitelisted()) {
+			$this->log('wcf.stopforumspam.log.whitelisted');
+		} else {	
+			// Check E-Mail-Address?
+			if (defined('STOPFORUMSPAM_CHECKEMAILADDRESS') && STOPFORUMSPAM_CHECKEMAILADDRESS && !empty($this->email)) {
+				$check[] = 'email';
+				$params['email'] = $this->email;
+			}
 			
-			// Perform API-Request
-			$requestResult = $this->apiRequest(self::APIURL . $this->buildQuery($params));
+			// Check IP-Address?
+			if (defined('STOPFORUMSPAM_CHECKIPADDRESS') && STOPFORUMSPAM_CHECKIPADDRESS && !empty($this->ip)) {
+				$check[] = 'ip';
+				$params['ip'] = $this->ip;
+			}
 			
-			$retArray = JSON::decode($requestResult, true);
-			
-			if (is_array($retArray) && isset($retArray['success']) && intval($retArray['success']) === 1) {
-				foreach ($check as $type) {
-					if (isset($retArray[$type]) && intval($retArray[$type]['appears']) === 1) {
-						$isSpammer = true;
+			// Just continue, if there's anything to check
+			if (!empty($check)) {
+				$isChecked = true;
+				
+				// Perform API-Request
+				$requestResult = $this->apiRequest(self::APIURL . $this->buildQuery($params));
+				
+				$retArray = JSON::decode($requestResult, true);
+				
+				if (is_array($retArray) && isset($retArray['success']) && intval($retArray['success']) === 1) {
+					foreach ($check as $type) {
+						if (isset($retArray[$type]) && intval($retArray[$type]['appears']) === 1) {
+							$isSpammer = true;
+						}
+						
+						$result[$type]['type'] = $type;
+						$result[$type]['value'] = (isset($retArray[$type]['value']) ? $retArray[$field]['value'] : $this->$type);
+						$result[$type]['frequency'] = (isset($retArray[$type]['frequency']) ? $retArray[$type]['frequency'] : 0);
+						$result[$type]['lastSeen'] = (isset($retArray[$type]['lastseen']) ? $retArray[$type]['lastseen'] : '0000-00-00 00:00:00');
+						$result[$type]['confidence'] = ($isSpammer ? $this->confidence($result[$type]['frequency'], $result[$type]['lastSeen']) : 0);
+						$avgConfidence += $result[$type]['confidence'];
 					}
 					
-					$result[$type]['type'] = $type;
-					$result[$type]['value'] = (isset($retArray[$type]['value']) ? $retArray[$field]['value'] : $this->$type);
-					$result[$type]['frequency'] = (isset($retArray[$type]['frequency']) ? $retArray[$type]['frequency'] : 0);
-					$result[$type]['lastSeen'] = (isset($retArray[$type]['lastseen']) ? $retArray[$type]['lastseen'] : '0000-00-00 00:00:00');
-					$result[$type]['confidence'] = ($isSpammer ? $this->confidence($result[$type]['frequency'], $result[$type]['lastSeen']) : 0);
-					$avgConfidence += $result[$type]['confidence'];
+					$avgConfidence /= count($check);
 				}
-				
-				$avgConfidence /= count($check);
 			}
 		}
 		
@@ -160,6 +167,9 @@ class StopForumSpam {
 		return $confidence;
 	}
 	
+	/**
+	 * Log
+	 */
 	public function log($msg = null, $className = null, $eventName = null) {		
 		$sql = "INSERT INTO	wcf".WCF_N."_sfs_log
 					(username, ipAddress, email, logDate, eventClassName, eventName, action)
@@ -174,6 +184,27 @@ class StopForumSpam {
 			$eventName,
 			$msg
 		));
+	}
+	
+	/**
+	 * Whitelist check
+	 */
+	private function isWhiteListed() {
+		if (defined('STOPFORUMSPAM_WHITELIST') && STOPFORUMSPAM_WHITELIST != '') {
+			if (!empty($this->username) && !StringUtil::executeWordFilter($this->username, STOPFORUMSPAM_WHITELIST)) {
+				return true;
+			}
+
+			if (!empty($this->ip) && !StringUtil::executeWordFilter($this->ip, STOPFORUMSPAM_WHITELIST)) {
+				return true;
+			}
+
+			if (!empty($this->email) && !StringUtil::executeWordFilter($this->email, STOPFORUMSPAM_WHITELIST)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	/**

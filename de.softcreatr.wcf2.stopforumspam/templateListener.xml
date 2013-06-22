@@ -5,7 +5,7 @@
 			<environment>user</environment>
 			<templatename>footer</templatename>
 			<eventname>copyright</eventname>
-			<templatecode><![CDATA[ &mdash; Stopforumspam-Protected]]></templatecode>
+			<templatecode><![CDATA[]]></templatecode>
 		</templatelistener>
 	</import>
 </data>

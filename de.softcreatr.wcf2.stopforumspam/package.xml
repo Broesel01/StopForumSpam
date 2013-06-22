@@ -4,8 +4,8 @@
 		<packagename><![CDATA[StopForumSpam]]></packagename>
 		<packagedescription><![CDATA[This package implements an antispam mechanism with stopforumspam.com service.]]></packagedescription>
 		<isunique>1</isunique>
-		<version>1.0.0 Alpha 2</version>
-		<date>2013-06-20</date>
+		<version>1.0.0 Alpha 3</version>
+		<date>2013-06-22</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -25,6 +25,7 @@
 	<instructions type="install">
 		<!-- files -->
 		<instruction type="file">files.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
 
 		<!-- config -->
