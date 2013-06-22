@@ -10,7 +10,7 @@
 
 {include file='header'}
 
-<p class="error">{@$exceptionString|nl2br}</p>
+<p class="error">{@STOPFORUMSPAM_BLOCKMESSAGE|language|nl2br}</p>
 
 {event name='content'}
 

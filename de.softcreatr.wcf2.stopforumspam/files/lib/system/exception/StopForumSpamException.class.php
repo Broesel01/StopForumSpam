@@ -3,7 +3,7 @@ namespace wcf\system\exception;
 use wcf\system\WCF;
 
 /**
- * StopForumSpamException shows an error page, if the user has been blocked
+ * Shows the StopForumSpam error page
  * 
  * @author	Sascha Greuel <sascha@softcreatr.de>
  * @copyright	2013 Sascha Greuel
@@ -18,17 +18,8 @@ class StopForumSpamException extends UserException {
 	 */
 	protected $ignoreDebugMode = true;
 	
-	public function show() {
-		$exceptionString = '';
-		
-		if (defined('STOPFORUMSPAM_BLOCKMESSAGE') && STOPFORUMSPAM_BLOCKMESSAGE != '') {
-			$exceptionString = WCF::getLanguage()->get(STOPFORUMSPAM_BLOCKMESSAGE, true);
-		} else {
-			$exceptionString = WCF::getLanguage()->get('wcf.acp.option.stopforumspam_defaultblockmessage');
-		}
-		
+	public function show() {		
 		WCF::getTPL()->assign(array(
-			'exceptionString' => $exceptionString,
 			'name' => get_class($this),
 			'file' => $this->getFile(),
 			'line' => $this->getLine(),
