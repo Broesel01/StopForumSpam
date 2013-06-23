@@ -4,8 +4,8 @@
 		<packagename><![CDATA[StopForumSpam]]></packagename>
 		<packagedescription><![CDATA[This package implements an antispam mechanism with stopforumspam.com service.]]></packagedescription>
 		<isunique>1</isunique>
-		<version>1.0.0 Alpha 3</version>
-		<date>2013-06-22</date>
+		<version>1.0.0 Alpha 4</version>
+		<date>2013-06-23</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -32,6 +32,7 @@
 		<instruction type="eventListener">eventListener.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="option">option.xml</instruction>
+		<instruction type="userOption">userOption.xml</instruction>
 
 		<!-- languages -->
 		<instruction type="language">language/*.xml</instruction>

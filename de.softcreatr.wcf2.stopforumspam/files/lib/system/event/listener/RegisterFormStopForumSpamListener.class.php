@@ -1,7 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
 use wcf\system\event\IEventListener;
-use wcf\system\exception\StopForumSpamException;
 use wcf\util\StopForumSpam;
 
 /**
@@ -19,14 +18,24 @@ class RegisterFormStopForumSpamListener implements IEventListener {
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
+		// Init
 		$sfs = new StopForumSpam($eventObj->username, $eventObj->email);
 		
+		// "Check registration" enabled?
+		if (!defined('STOPFORUMSPAM_CHECKREGISTRATION') || !STOPFORUMSPAM_CHECKREGISTRATION) {
+			//$sfs->log('wcf.stopforumspam.log.checkregister_disabled');
+			return false;
+		}
+
 		// Perform check against sfs api
 		$result = $sfs->check();
 		
 		// If user is a spammer, perform actions based on the settings
 		if (isset($result['spammer']) && $result['spammer'] === true) {
-			throw new StopForumSpamException();
+			$sfs->markAsSpammer((defined('STOPFORUMSPAM_DENYREGISTRATION') && STOPFORUMSPAM_DENYREGISTRATION));
+			//$sfs->log('wcf.stopforumspam.log.isspammer');
+		} else {
+			//$sfs->log('wcf.stopforumspam.log.isnospammer');
 		}
 	}
 }

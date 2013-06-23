@@ -1,5 +1,7 @@
 <?php
 namespace wcf\util;
+use wcf\data\user\UserEditor;
+use wcf\system\exception\StopForumSpamException;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 use wcf\util\JSON;
@@ -34,6 +36,25 @@ class StopForumSpam {
 	}
 	
 	/**
+	 * Just do it!
+	 *
+	 * Returns true, if user has been identified as spammer
+	 */
+	public function execute() {
+		// Perform check against sfs api
+		$result = $this->check();
+		
+		// If user is a spammer, perform actions based on the settings
+		if (isset($result['spammer']) && $result['spammer'] === true) {
+			$this->markAsSpammer();
+			//$this->log('wcf.stopforumspam.log.isspammer');
+			return true;
+		} else {
+			//$this->log('wcf.stopforumspam.log.isnospammer');
+		}
+	}
+	
+	/**
 	 * Check, if the given data is listed on SFS
 	 */
 	public function check() {
@@ -50,9 +71,9 @@ class StopForumSpam {
 		
 		// Check, if module is enabled and if the given information is whitelisted
 		if (!defined('MODULE_STOPFORUMSPAM') || !MODULE_STOPFORUMSPAM) {
-			$this->log('wcf.stopforumspam.log.module_disabled');
+			//$this->log('wcf.stopforumspam.log.module_disabled');
 		} else if ($this->isWhitelisted()) {
-			$this->log('wcf.stopforumspam.log.whitelisted');
+			//$this->log('wcf.stopforumspam.log.whitelisted');
 		} else {	
 			// Check E-Mail-Address?
 			if (defined('STOPFORUMSPAM_CHECKEMAILADDRESS') && STOPFORUMSPAM_CHECKEMAILADDRESS && !empty($this->email)) {
@@ -138,11 +159,49 @@ class StopForumSpam {
 	}
 	
 	/**
+	 * Mark user as spammer
+	 */
+	public function markAsSpammer($exception = true) {
+		WCF::getSession()->register('stopforumspam_userstatus', 2);
+		WCF::getSession()->update();
+
+		if (WCF::getUser()->userID) {
+			$userEditor = new UserEditor(WCF::getUser());
+			$userEditor->updateUserOptions(array(
+				User::getUserOptionID('stopforumspam_userstatus') => 2
+			));
+		}
+		
+		if ($exception) {
+			throw new StopForumSpamException();
+		}
+	}
+	
+	/**
+	 * Log
+	 */
+	public function log($msg = null, $className = null, $eventName = null) {		
+		$sql = "INSERT INTO	wcf".WCF_N."_sfs_log
+					(username, ipAddress, email, logDate, eventClassName, eventName, logMessage)
+			VALUES		(?, ?, ?, ?, ?, ?, ?)";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->username,
+			$this->ip,
+			$this->email,
+			TIME_NOW,
+			$className,
+			$eventName,
+			$msg
+		));
+	}
+	
+	/**
 	 * Confidence score calculation
 	 *
 	 * Based on the blog post at http://amix.dk/blog/post/19588
 	 */
-	public function confidence($reports = 0, $lastReport = 0) {
+	protected function confidence($reports = 0, $lastReport = 0) {
 		$ups = $reports / 2;
 		$gracePeriod = 7;
 		
@@ -168,28 +227,9 @@ class StopForumSpam {
 	}
 	
 	/**
-	 * Log
-	 */
-	public function log($msg = null, $className = null, $eventName = null) {		
-		$sql = "INSERT INTO	wcf".WCF_N."_sfs_log
-					(username, ipAddress, email, logDate, eventClassName, eventName, action)
-			VALUES		(?, ?, ?, ?, ?, ?, ?)";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$this->username,
-			$this->ip,
-			$this->email,
-			TIME_NOW,
-			$className,
-			$eventName,
-			$msg
-		));
-	}
-	
-	/**
 	 * Whitelist check
 	 */
-	private function isWhiteListed() {
+	protected function isWhiteListed() {
 		if (defined('STOPFORUMSPAM_WHITELIST') && STOPFORUMSPAM_WHITELIST != '') {
 			if (!empty($this->username) && !StringUtil::executeWordFilter($this->username, STOPFORUMSPAM_WHITELIST)) {
 				return true;

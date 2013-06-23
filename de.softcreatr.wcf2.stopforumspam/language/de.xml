@@ -2,10 +2,10 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de" languagename="Deutsch">
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.module.security"><![CDATA[Sicherheit]]></item>
-		<item name="wcf.acp.option.module_stopforumspam"><![CDATA[Stopforumspam]]></item>
-		<item name="wcf.acp.option.module_stopforumspam.description"><![CDATA[Aktiviert das Stopforumspam-Plugin.]]></item>
-		<item name="wcf.acp.option.category.stopforumspam.settings"><![CDATA[Stopforumspam]]></item>
-		<item name="wcf.acp.option.category.stopforumspam.settings.description"><![CDATA[Stopforumspam für das Woltlab Community Framework (Tempest) - Copyright &copy; 2011-2013 by <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"http://www.softcreatr.de"|rawurlencode}">Sascha Greuel</a>]]></item>
+		<item name="wcf.acp.option.module_stopforumspam"><![CDATA[StopForumSpam]]></item>
+		<item name="wcf.acp.option.module_stopforumspam.description"><![CDATA[Aktiviert das StopForumSpam-Plugin.]]></item>
+		<item name="wcf.acp.option.category.stopforumspam.settings"><![CDATA[StopForumSpam]]></item>
+		<item name="wcf.acp.option.category.stopforumspam.settings.description"><![CDATA[StopForumSpam für das Woltlab Community Framework (Tempest) - Copyright &copy; 2011-2013 by <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"http://www.softcreatr.de"|rawurlencode}">Sascha Greuel</a>]]></item>
 		
 		<!-- General settings -->
 		
@@ -63,5 +63,15 @@ Bitte beachten Sie, dass <em>{PAGE_TITLE|language}</em> keinerlei Einfluss auf A
 	
 	<category name="wcf.user.register">
 		<item name="wcf.user.register.stopforumspam_disclaimer"><![CDATA[Disclaimer: Anti-Spam]]></item>
+	</category>
+	
+	<category name="wcf.user.option">
+		<item name="wcf.user.option.category.stopforumspam"><![CDATA[Stopforumspam]]></item>
+		<item name="wcf.user.option.category.stopforumspam.settings"><![CDATA[Stopforumspam]]></item>
+		<item name="wcf.user.option.stopforumspam_userstatus"><![CDATA[Spammer?]]></item>
+		<item name="wcf.user.option.stopforumspam_userstatus.description"><![CDATA[Handelt es sich bei diesem User um einen Spammer? Der Wert dieses Feldes wird während der Registrierung des Users gesetzt, kann aber bei "False Positives" manuell verändert werden, um dem entsprechenden User den Zugriff auf das Forum wieder zu erlauben.]]></item>
+		<item name="wcf.user.option.stopforumspam.undefined"><![CDATA[Undefiniert]]></item>
+		<item name="wcf.user.option.stopforumspam.true"><![CDATA[Ja]]></item>
+		<item name="wcf.user.option.stopforumspam.false"><![CDATA[Nein]]></item>
 	</category>
 </language>
