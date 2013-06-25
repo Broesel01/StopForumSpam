@@ -1,5 +1,6 @@
 <?php
 namespace wcf\util;
+use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\system\exception\StopForumSpamException;
 use wcf\system\WCF;
