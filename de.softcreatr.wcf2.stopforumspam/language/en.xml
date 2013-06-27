@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en" languagename="English">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de" languagename="Deutsch">
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.module.security"><![CDATA[Sicherheit]]></item>
 		<item name="wcf.acp.option.module_stopforumspam"><![CDATA[StopForumSpam]]></item>
 		<item name="wcf.acp.option.module_stopforumspam.description"><![CDATA[Aktiviert das StopForumSpam-Plugin.]]></item>
 		<item name="wcf.acp.option.category.stopforumspam.settings"><![CDATA[StopForumSpam]]></item>
-		<item name="wcf.acp.option.category.stopforumspam.settings.description"><![CDATA[StopForumSpam für das Woltlab Community Framework (Tempest) - Copyright &copy; 2011-2013 by <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"http://www.softcreatr.de"|rawurlencode}">Sascha Greuel</a>]]></item>
+		<item name="wcf.acp.option.category.stopforumspam.settings.description"><![CDATA[StopForumSpam für das WoltLab Community Framework (Tempest) - Copyright &copy; 2011-2013 by <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"http://www.softcreatr.de"|rawurlencode}">Sascha Greuel</a>]]></item>
 		
 		<!-- General settings -->
 		
@@ -13,7 +13,7 @@
 		<item name="wcf.acp.option.stopforumspam_checkipaddress"><![CDATA[IP-Check (empfohlen)]]></item>
 		<item name="wcf.acp.option.stopforumspam_checkipaddress.description"><![CDATA[Soll die IP-Adresse bei der Registrierung geprüft werden?]]></item>
 		<item name="wcf.acp.option.stopforumspam_checkemailaddress"><![CDATA[E-Mail-Check (empfohlen)]]></item>
-		<item name="wcf.acp.option.stopforumspam_checkemailaddress.description"><![CDATA[Soll die E-Mail Adresse bei der Registrierung geprüft werden?]]></item>
+		<item name="wcf.acp.option.stopforumspam_checkemailaddress.description"><![CDATA[Soll die E-Mail-Adresse bei der Registrierung geprüft werden?]]></item>
 		<item name="wcf.acp.option.stopforumspam_whitelist"><![CDATA[Whitelist]]></item>
 		<item name="wcf.acp.option.stopforumspam_whitelist.description"><![CDATA[Benutzernamen, IP- und E-Mail-Adressen, welche unter keinen Umständen überprüft/geblockt werden sollen.]]></item>
 		<item name="wcf.acp.option.stopforumspam_enabledisclaimer"><![CDATA[Disclaimer aktivieren (empfohlen)]]></item>
@@ -43,7 +43,7 @@
 		
 		<item name="wcf.acp.option.category.stopforumspam.advsettings"><![CDATA[Erweiterte Einstellungen]]></item>
 		<item name="wcf.acp.option.stopforumspam_maxage"><![CDATA[Maximales Alter (in Tagen) des Eintrags in der SFS-Datenbank]]></item>
-		<item name="wcf.acp.option.stopforumspam_maxage.description"><![CDATA[Wenn angegeben (d.h. größer als 0) werden Spammer nur als solche behandelt, wenn der letzte Eintrag in der Datenbank von Stopforumspam innerhalb des definierten Zeitraums erfolgt ist.]]></item>
+		<item name="wcf.acp.option.stopforumspam_maxage.description"><![CDATA[Wenn angegeben (d.h. größer als 0), werden Spammer nur als solche behandelt, wenn der letzte Eintrag in der Datenbank von Stopforumspam innerhalb des definierten Zeitraums erfolgt ist.]]></item>
 		<item name="wcf.acp.option.stopforumspam_confidence"><![CDATA[Minimum Score (SFS)]]></item>
 		<item name="wcf.acp.option.stopforumspam_confidence.description"><![CDATA[Jeder Spammer verfügt über einen SFS-internen Score, d.h. eine Bewertung in Punkten. Je aggressiver ein Spammer, desto größer der Score. Definieren Sie hier einen Wert über 0, werden Spammer nur als solche behandelt, wenn sie die definierte Punktzahl erreicht bzw. überschritten haben.]]></item>
 		
@@ -54,7 +54,7 @@
 Sollten Sie der Meinung sein, dass es sich hierbei um einen Fehler handelt, besuchen Sie bitte folgende Webseite und beantragen Sie die Löschung Ihrer Daten:
 
 <a href="http://www.stopforumspam.com/removal" class="externalURL">http://www.stopforumspam.com/removal</a>]]></item>
-		<item name="wcf.acp.option.stopforumspam_defaultdisclaimertext"><![CDATA[Um uns weitesgehend vor Spam zu schützen, werden Ihre Daten (IP- und E-Mail-Adresse) nach Absenden des Registrierungsformulars an den Drittanbieterdienst <a href="http://www.stopforumspam.com/" class="externalURL">StopForumSpam</a> übermittelt und ausgewertet. Diese Auswertung wird als Grundlage zur Entscheidung, ob Ihre Registrierung angenommen oder abgelehnt wird, verwendet.
+		<item name="wcf.acp.option.stopforumspam_defaultdisclaimertext"><![CDATA[Um uns weitestgehend vor Spam zu schützen, werden Ihre Daten (IP- und E-Mail-Adresse) nach Absenden des Registrierungsformulars an den Drittanbieterdienst <a href="http://www.stopforumspam.com/" class="externalURL">StopForumSpam</a> übermittelt und ausgewertet. Diese Auswertung wird als Grundlage zur Entscheidung, ob Ihre Registrierung angenommen oder abgelehnt wird, verwendet.
 		
 Ein negatives Ergebnis kann u.U. zur Folge haben, dass die Registrierung nicht durchgeführt wird.
 

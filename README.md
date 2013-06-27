@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/SoftCreatR/StopForumSpam.png?branch=master)](https://travis-ci.org/SoftCreatR/StopForumSpam)
 
-This package implements an antispam mechanism into Woltlab Community Framework 2 (Maelstrom) with stopforumspam.com service.
+This package implements an antispam mechanism into WoltLab Community Framework 2 (Maelstrom) with stopforumspam.com service.
 
 ## License
 
