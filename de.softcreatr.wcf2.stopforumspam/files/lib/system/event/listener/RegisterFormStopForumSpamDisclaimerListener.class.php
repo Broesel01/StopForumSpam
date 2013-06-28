@@ -9,7 +9,7 @@ use wcf\util\HeaderUtil;
  * A disclaimer for StopForumSpam
  * 
  * @author	Sascha Greuel <sascha@softcreatr.de>
- * @copyright	2013 Sascha Greuel
+ * @copyright	2010-2013 Sascha Greuel
  * @license	Creative Commons BY-SA <http://creativecommons.org/licenses/by-sa/3.0/>
  * @package	de.softcreatr.wcf2.stopforumspam
  * @subpackage	system.event.listener
@@ -26,7 +26,7 @@ class RegisterFormStopForumSpamDisclaimerListener implements IEventListener {
 		}
 		
 		// check StopForumSpam disclaimer
-		if (defined('STOPFORUMSPAM_ENABLEDISCLAIMER') && STOPFORUMSPAM_ENABLEDISCLAIMER && !WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
+		if (MODULE_STOPFORUMSPAM && STOPFORUMSPAM_ENABLEDISCLAIMER && !WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
 			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('StopForumSpamDisclaimer'));
 			exit;
 		}

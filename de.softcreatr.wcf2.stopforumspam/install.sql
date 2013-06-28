@@ -7,6 +7,6 @@ CREATE TABLE wcf1_sfs_log (
 	logDate INT(10) NOT NULL DEFAULT 0,
 	eventClassName VARCHAR(80) NOT NULL DEFAULT '',
 	eventName VARCHAR(50) NOT NULL DEFAULT '',
-	logMessage VARCHAR(255) NOT NULL DEFAULT '',
-	KEY logID (logID)
+	status TINYINT(1) NOT NULL DEFAULT 0,
+	error TEXT
 );

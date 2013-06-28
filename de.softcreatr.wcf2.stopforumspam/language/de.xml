@@ -5,7 +5,6 @@
 		<item name="wcf.acp.option.module_stopforumspam"><![CDATA[StopForumSpam]]></item>
 		<item name="wcf.acp.option.module_stopforumspam.description"><![CDATA[Aktiviert das StopForumSpam-Plugin.]]></item>
 		<item name="wcf.acp.option.category.stopforumspam.settings"><![CDATA[StopForumSpam]]></item>
-		<item name="wcf.acp.option.category.stopforumspam.settings.description"><![CDATA[StopForumSpam für das WoltLab Community Framework (Tempest) - Copyright &copy; 2011-2013 by <a href="{@$__wcf->getPath()}acp/dereferrer.php?url={"http://www.softcreatr.de"|rawurlencode}">Sascha Greuel</a>]]></item>
 		
 		<!-- General settings -->
 		
@@ -34,8 +33,8 @@
 		<item name="wcf.acp.option.stopforumspam_enablenotification.description"><![CDATA[Soll der Zugriff auf das Forum gestoppt und stattdessen eine Fehlermeldung ausgegeben werden?]]></item>
 		<item name="wcf.acp.option.stopforumspam_blockmessage"><![CDATA[Sperrnachricht]]></item>
 		<item name="wcf.acp.option.stopforumspam_blockmessage.description"><![CDATA[Geben Sie hier den Text ein, den der User nach erfolgter Sperre zu sehen bekommen soll.]]></item>
-		<item name="wcf.acp.option.stopforumspam_denyregistration"><![CDATA[Registrierung verweigern]]></item>
-		<item name="wcf.acp.option.stopforumspam_denyregistration.description"><![CDATA[Standardmäßig wird ein als Spammer erkannter neuer Benutzer durch Aktivieren der Option "Registrierung überwachen" unmittelbar nach der Registrierung gesperrt. Durch Aktivieren der Option "Registrierung verweigern?" wird der Benutzeraccount eines erkannten Spammers gar nicht erst angelegt.]]></item>
+		<item name="wcf.acp.option.stopforumspam_prioritizecheck"><![CDATA[Prüfung vorziehen]]></item>
+		<item name="wcf.acp.option.stopforumspam_prioritizecheck.description"><![CDATA[Standardmäßig wird die Prüfung erst nach Ausführen einer Aktion durchgeführt . Durch Aktivieren dieser Option wird (wenn möglich) die Prüfung vorgezogen. So kann beispielsweise verhindert werden, dass ein Benutzer nach seiner Registrierung in der Datenbank angelegt wird.]]></item>
 		<item name="wcf.acp.option.stopforumspam_hidefromml"><![CDATA[In Mitgliederliste verbergen (empfohlen)]]></item>
 		<item name="wcf.acp.option.stopforumspam_hidefromml.description"><![CDATA[Sollen als Spammer markierte Benutzer in der Mitgliederliste verborgen werden?]]></item>
 		
@@ -73,5 +72,41 @@ Bitte beachten Sie, dass <em>{PAGE_TITLE|language}</em> keinerlei Einfluss auf A
 		<item name="wcf.user.option.stopforumspam.undefined"><![CDATA[Undefiniert]]></item>
 		<item name="wcf.user.option.stopforumspam.true"><![CDATA[Ja]]></item>
 		<item name="wcf.user.option.stopforumspam.false"><![CDATA[Nein]]></item>
+	</category>
+	
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.log.stopforumspam"><![CDATA[Stopforumspam]]></item>
+	</category>
+	
+	<category name="wcf.acp.stopforumspam">
+		<item name="wcf.acp.stopforumspam.log"><![CDATA[StopForumSpam-Protokoll]]></item>
+		<item name="wcf.acp.stopforumspam.log.clear"><![CDATA[Protokoll leeren]]></item>
+		<item name="wcf.acp.stopforumspam.log.clear.confirm"><![CDATA[Wollen Sie alle Protokoll-Einträge wirklich löschen?]]></item>
+		<item name="wcf.acp.stopforumspam.log.username"><![CDATA[Benutzername]]></item>
+		<item name="wcf.acp.stopforumspam.log.ipaddress"><![CDATA[IP-Adresse]]></item>
+		<item name="wcf.acp.stopforumspam.log.email"><![CDATA[E-Mail-Adresse]]></item>
+		<item name="wcf.acp.stopforumspam.log.logdate"><![CDATA[Datum]]></item>
+		<item name="wcf.acp.stopforumspam.log.eventclassname"><![CDATA[PHP-Klassenname]]></item>
+		<item name="wcf.acp.stopforumspam.log.eventname"><![CDATA[PHP-Eventname]]></item>
+		<item name="wcf.acp.stopforumspam.log.status"><![CDATA[Status]]></item>
+		<item name="wcf.acp.stopforumspam.log.error.showdetails"><![CDATA[Details anzeigen]]></item>
+		<item name="wcf.acp.stopforumspam.log.error.details"><![CDATA[Fehlermeldung]]></item>
+		<item name="wcf.acp.stopforumspam.log.noEntries"><![CDATA[Derzeit sind keine Einträge vorhanden.]]></item>
+	</category>
+	
+	<category name="wcf.stopforumspam.log">
+		<item name="wcf.stopforumspam.log.blocked"><![CDATA[Geblockt]]></item>
+		<item name="wcf.stopforumspam.log.success"><![CDATA[OK]]></item>
+		<item name="wcf.stopforumspam.log.error"><![CDATA[Fehler]]></item>
+		<item name="wcf.stopforumspam.log.module_disabled"><![CDATA[Das StopForumSpam-Modul ist deaktiviert.]]></item>
+		<item name="wcf.stopforumspam.log.whitelisted"><![CDATA[Dieser Benutzer befindet sich auf Ihrer Whitelist.]]></item>
+		<item name="wcf.stopforumspam.log.checkregister_disabled"><![CDATA[Die Überprüfung der Registrierung ist deaktiviert.]]></item>
+		<item name="wcf.stopforumspam.log.alreadychecked"><![CDATA[Der Benutzer wurde bereits (mit positivem Ergebnis) überprüft.]]></item>
+	</category>
+	
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.category.user.stopforumspam"><![CDATA[StopForumSpam]]></item>
+		<item name="wcf.acp.group.option.user.stopforumspam.enable"><![CDATA[Überprüfung aktivieren]]></item>
+		<item name="wcf.acp.group.option.user.stopforumspam.enable.description"><![CDATA[Mitglieder dieser Benutzergruppe werden in jeder (aktivierten) Situation durch StopForumSpam überprüft. Diese Option wird auf alle Mitglieder dieser Benutzergruppe angewandt, deren Überprüfungsstatus "Undefiniert" ist.]]></item>
 	</category>
 </language>

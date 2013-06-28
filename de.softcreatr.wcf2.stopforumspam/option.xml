@@ -109,7 +109,7 @@ admin@localhost]]>
 				<showorder>3</showorder>
 			</option>
 
-			<option name="stopforumspam_denyregistration">
+			<option name="stopforumspam_prioritizecheck">
 				<categoryname>stopforumspam.blocksettings</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>

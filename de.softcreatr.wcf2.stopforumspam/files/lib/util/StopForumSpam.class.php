@@ -1,5 +1,6 @@
 <?php
 namespace wcf\util;
+use wcf\data\stopforumspam\log\StopForumSpamLogEditor;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\system\exception\StopForumSpamException;
@@ -13,7 +14,7 @@ use wcf\util\UserUtil;
  * StopForumSpam API
  * 
  * @author	Sascha Greuel <sascha@softcreatr.de>
- * @copyright	2013 Sascha Greuel
+ * @copyright	2010-2013 Sascha Greuel
  * @license	Creative Commons BY-SA <http://creativecommons.org/licenses/by-sa/3.0/>
  * @package	de.softcreatr.wcf2.stopforumspam
  * @subpackage	util
@@ -23,36 +24,17 @@ class StopForumSpam {
 	const APIURL    = 'http://www.stopforumspam.com/api';
 	const REPORTURL = 'http://www.stopforumspam.com/add.php';
 	
-	protected $username = null;
-	protected $email = null;
-	protected $ip = null;
+	protected $username = '';
+	protected $email = '';
+	protected $ip = '';
 	
 	/**
 	 * Prepares a new instance of StopForumSpam
 	 */
-	public function __construct($username = null, $email = null, $ip = null) {
+	public function __construct($username = '', $email = '', $ip = '') {		
 		$this->username = $username;
 		$this->email = $email;
 		$this->ip = (!empty($ip) ? $ip : UserUtil::convertIPv6To4(UserUtil::getIpAddress()));
-	}
-	
-	/**
-	 * Just do it!
-	 *
-	 * Returns true, if user has been identified as spammer
-	 */
-	public function execute() {
-		// Perform check against sfs api
-		$result = $this->check();
-		
-		// If user is a spammer, perform actions based on the settings
-		if (isset($result['spammer']) && $result['spammer'] === true) {
-			$this->markAsSpammer();
-			//$this->log('wcf.stopforumspam.log.isspammer');
-			return true;
-		} else {
-			//$this->log('wcf.stopforumspam.log.isnospammer');
-		}
 	}
 	
 	/**
@@ -62,8 +44,9 @@ class StopForumSpam {
 		// Defaults
 		$isChecked = $isSpammer = false;
 		$check = $result = array();
-		$requestResult = null;
+		$requestResult = '';
 		$avgConfidence = 0;
+		$lastSeen = '0000-00-00 00:00:00';
 		$params = array(
 			'unix' => 1,
 			'confidence' => 1,
@@ -71,19 +54,24 @@ class StopForumSpam {
 		);
 		
 		// Check, if module is enabled and if the given information is whitelisted
-		if (!defined('MODULE_STOPFORUMSPAM') || !MODULE_STOPFORUMSPAM) {
-			//$this->log('wcf.stopforumspam.log.module_disabled');
-		} else if ($this->isWhitelisted()) {
-			//$this->log('wcf.stopforumspam.log.whitelisted');
-		} else {	
+		if (!MODULE_STOPFORUMSPAM) {
+			$this->log(false, 'wcf.stopforumspam.log.module_disabled');
+			return false;
+		} else if ($this->isWhitelisted() /*|| !WCF::getSession()->getPermission('user.stopforumspam.enable')*/) {
+			$this->log(false, 'wcf.stopforumspam.log.whitelisted');
+			return false;
+		} else if (WCF::getUser()->userID && WCF::getUser()->stopforumspam_userstatus == 1) {
+			$this->log(false, 'wcf.stopforumspam.log.alreadychecked');
+			return false;
+		} else {
 			// Check E-Mail-Address?
-			if (defined('STOPFORUMSPAM_CHECKEMAILADDRESS') && STOPFORUMSPAM_CHECKEMAILADDRESS && !empty($this->email)) {
+			if (STOPFORUMSPAM_CHECKEMAILADDRESS && !empty($this->email)) {
 				$check[] = 'email';
 				$params['email'] = $this->email;
 			}
 			
 			// Check IP-Address?
-			if (defined('STOPFORUMSPAM_CHECKIPADDRESS') && STOPFORUMSPAM_CHECKIPADDRESS && !empty($this->ip)) {
+			if (STOPFORUMSPAM_CHECKIPADDRESS && !empty($this->ip)) {
 				$check[] = 'ip';
 				$params['ip'] = $this->ip;
 			}
@@ -108,11 +96,31 @@ class StopForumSpam {
 						$result[$type]['frequency'] = (isset($retArray[$type]['frequency']) ? $retArray[$type]['frequency'] : 0);
 						$result[$type]['lastSeen'] = (isset($retArray[$type]['lastseen']) ? $retArray[$type]['lastseen'] : '0000-00-00 00:00:00');
 						$result[$type]['confidence'] = ($isSpammer ? $this->confidence($result[$type]['frequency'], $result[$type]['lastSeen']) : 0);
+						
+						$lastSeen = ($lastSeen < $result[$type]['lastSeen'] ? $result[$type]['lastSeen'] : $lastSeen);
 						$avgConfidence += $result[$type]['confidence'];
 					}
-					
+
 					$avgConfidence /= count($check);
 				}
+			}
+			
+			// Identify spammer, using extended settings
+			if (STOPFORUMSPAM_MAXAGE <> 0) {
+				if (TIME_NOW - (STOPFORUMSPAM_MAXAGE * 24 * 60 * 60) >= $lastSeen) {
+					$isSpammer = false;
+				}
+			}
+			
+			if (STOPFORUMSPAM_CONFIDENCE <> 0) {
+				if ($avgConfidence < STOPFORUMSPAM_CONFIDENCE) {
+					$isSpammer = false;
+				}
+			}
+			
+			// Mark user as spammer, if enabled
+			if ($isSpammer) {
+				$this->markAsSpammer(STOPFORUMSPAM_PRIORITIZECHECK);
 			}
 		}
 		
@@ -127,7 +135,7 @@ class StopForumSpam {
 	/**
 	 * Submit a new report, based on the given informations
 	 */
-	public function report($evidence = null) {
+	public function report($evidence = '') {
 		$params = array();
 		$reportResult = 'Error';
 
@@ -147,7 +155,7 @@ class StopForumSpam {
 		// on every report (see SFS removal policy)
 		if (!empty($evidence)) {
 			$params['evidence'] = StringUtil::trim($evidence);
-			$params['evidence'] .= "\n\n----------------\nStopforumspam for Woltlab Community Framework";
+			$params['evidence'] .= "\n\n----------------\nStopforumspam for WoltLab Community Framework";
 		}
 	
 		// Just continue, if there's anything to report
@@ -181,19 +189,18 @@ class StopForumSpam {
 	/**
 	 * Log
 	 */
-	public function log($msg = null, $className = null, $eventName = null) {		
-		$sql = "INSERT INTO	wcf".WCF_N."_sfs_log
-					(username, ipAddress, email, logDate, eventClassName, eventName, logMessage)
-			VALUES		(?, ?, ?, ?, ?, ?, ?)";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$this->username,
-			$this->ip,
-			$this->email,
-			TIME_NOW,
-			$className,
-			$eventName,
-			$msg
+	public function log($status = false, $message = '', $className = '', $eventName = '') {
+		list(, $caller) = debug_backtrace(false);
+
+		StopForumSpamLogEditor::create(array(
+			'username' => $this->username,
+			'ipAddress' => $this->ip,
+			'email' => $this->email,
+			'logDate' => TIME_NOW,
+			'eventClassName' => (empty($className) ? $caller['class'] : $className),
+			'eventName' => (empty($eventName) ? $caller['function'] : $eventName),
+			'status' => ($status ? 1 : 0),
+			'error' => $message
 		));
 	}
 	
@@ -231,7 +238,7 @@ class StopForumSpam {
 	 * Whitelist check
 	 */
 	protected function isWhiteListed() {
-		if (defined('STOPFORUMSPAM_WHITELIST') && STOPFORUMSPAM_WHITELIST != '') {
+		if (STOPFORUMSPAM_WHITELIST != '') {
 			if (!empty($this->username) && !StringUtil::executeWordFilter($this->username, STOPFORUMSPAM_WHITELIST)) {
 				return true;
 			}
