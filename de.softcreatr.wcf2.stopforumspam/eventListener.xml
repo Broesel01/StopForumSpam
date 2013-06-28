@@ -12,7 +12,7 @@
 		
 		<eventlistener>
 			<eventclassname>wcf\form\RegisterForm</eventclassname>
-			<eventname>validate</eventname>
+			<eventname>save</eventname>
 			<listenerclassname>wcf\system\event\listener\RegisterFormStopForumSpamListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
