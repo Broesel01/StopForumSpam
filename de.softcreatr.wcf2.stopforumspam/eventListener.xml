@@ -50,5 +50,14 @@
 			<listenerclassname>wcf\system\event\listener\MembersListPageStopForumSpamListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
+		
+		<!-- UserPage -->
+		
+		<eventlistener>
+			<eventclassname>wcf\page\UserPage</eventclassname>
+			<eventname>readParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\UserPageStopForumSpamListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
 	</import>
 </data>
