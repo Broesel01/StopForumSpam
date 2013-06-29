@@ -30,7 +30,7 @@
 		
 		<item name="wcf.acp.option.category.stopforumspam.blocksettings"><![CDATA[Blockeinstellungen]]></item>
 		<item name="wcf.acp.option.stopforumspam_enablenotification"><![CDATA[Zugriff blocken (empfohlen)]]></item>
-		<item name="wcf.acp.option.stopforumspam_enablenotification.description"><![CDATA[Soll der Zugriff auf das Forum gestoppt und stattdessen eine Fehlermeldung ausgegeben werden?]]></item>
+		<item name="wcf.acp.option.stopforumspam_enablenotification.description"><![CDATA[Soll der Zugriff auf die Community gestoppt und stattdessen eine Fehlermeldung ausgegeben werden?]]></item>
 		<item name="wcf.acp.option.stopforumspam_blockmessage"><![CDATA[Sperrnachricht]]></item>
 		<item name="wcf.acp.option.stopforumspam_blockmessage.description"><![CDATA[Geben Sie hier den Text ein, den der User nach erfolgter Sperre zu sehen bekommen soll.]]></item>
 		<item name="wcf.acp.option.stopforumspam_prioritizecheck"><![CDATA[Prüfung vorziehen]]></item>
@@ -42,7 +42,7 @@
 		
 		<item name="wcf.acp.option.category.stopforumspam.advsettings"><![CDATA[Erweiterte Einstellungen]]></item>
 		<item name="wcf.acp.option.stopforumspam_maxage"><![CDATA[Maximales Alter (in Tagen) des Eintrags in der SFS-Datenbank]]></item>
-		<item name="wcf.acp.option.stopforumspam_maxage.description"><![CDATA[Wenn angegeben (d.h. größer als 0), werden Spammer nur als solche behandelt, wenn der letzte Eintrag in der Datenbank von Stopforumspam innerhalb des definierten Zeitraums erfolgt ist.]]></item>
+		<item name="wcf.acp.option.stopforumspam_maxage.description"><![CDATA[Wenn angegeben (d.h. größer als 0), werden Spammer nur als solche behandelt, wenn der letzte Eintrag in der Datenbank von StopForumSpam innerhalb des definierten Zeitraums erfolgt ist.]]></item>
 		<item name="wcf.acp.option.stopforumspam_confidence"><![CDATA[Minimum Score (SFS)]]></item>
 		<item name="wcf.acp.option.stopforumspam_confidence.description"><![CDATA[Jeder Spammer verfügt über einen SFS-internen Score, d.h. eine Bewertung in Punkten. Je aggressiver ein Spammer, desto größer der Score. Definieren Sie hier einen Wert über 0, werden Spammer nur als solche behandelt, wenn sie die definierte Punktzahl erreicht bzw. überschritten haben.]]></item>
 		
@@ -65,17 +65,17 @@ Bitte beachten Sie, dass <em>{PAGE_TITLE|language}</em> keinerlei Einfluss auf A
 	</category>
 	
 	<category name="wcf.user.option">
-		<item name="wcf.user.option.category.stopforumspam"><![CDATA[Stopforumspam]]></item>
-		<item name="wcf.user.option.category.stopforumspam.settings"><![CDATA[Stopforumspam]]></item>
+		<item name="wcf.user.option.category.stopforumspam"><![CDATA[StopForumSpam]]></item>
+		<item name="wcf.user.option.category.stopforumspam.settings"><![CDATA[StopForumSpam]]></item>
 		<item name="wcf.user.option.stopforumspam_userstatus"><![CDATA[Spammer?]]></item>
-		<item name="wcf.user.option.stopforumspam_userstatus.description"><![CDATA[Handelt es sich bei diesem User um einen Spammer? Der Wert dieses Feldes wird während der Registrierung des Users gesetzt, kann aber bei "False Positives" manuell verändert werden, um dem entsprechenden User den Zugriff auf das Forum wieder zu erlauben.]]></item>
+		<item name="wcf.user.option.stopforumspam_userstatus.description"><![CDATA[Handelt es sich bei diesem User um einen Spammer? Der Wert dieses Feldes wird während der Registrierung des Users gesetzt, kann aber bei Bedarf manuell verändert werden, um dem entsprechenden User den Zugriff auf die Community wieder zu erlauben.]]></item>
 		<item name="wcf.user.option.stopforumspam.undefined"><![CDATA[Undefiniert]]></item>
 		<item name="wcf.user.option.stopforumspam.true"><![CDATA[Ja]]></item>
 		<item name="wcf.user.option.stopforumspam.false"><![CDATA[Nein]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
-		<item name="wcf.acp.menu.link.log.stopforumspam"><![CDATA[Stopforumspam]]></item>
+		<item name="wcf.acp.menu.link.log.stopforumspam"><![CDATA[StopForumSpam]]></item>
 	</category>
 	
 	<category name="wcf.acp.stopforumspam">
