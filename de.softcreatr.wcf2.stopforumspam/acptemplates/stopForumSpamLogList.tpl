@@ -126,7 +126,11 @@
 							<td class="columnID columnLogID">{@$stopForumSpamLog->logID}</td>
 							<td class="columnTitle columnUsername">
 								{if !$stopForumSpamLog->username|empty}
-									{$stopForumSpamLog->username}
+									{if $stopForumSpamLog->userID}
+										<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$stopForumSpamLog->userID}{/link}">{$stopForumSpamLog->username}</a>
+									{else}
+										{$stopForumSpamLog->username}
+									{/if}
 								{else}
 									&mdash;
 								{/if}

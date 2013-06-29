@@ -193,9 +193,10 @@ class StopForumSpam {
 		list(, $caller) = debug_backtrace(false);
 
 		StopForumSpamLogEditor::create(array(
-			'username' => $this->username,
+			'userid' => (WCF::getUser()->userID ? WCF::getUser()->userID : 0),
+			'username' => (!empty($this->username) ? $this->username : (WCF::getUser()->userID ? WCF::getUser()->username : '')),
 			'ipAddress' => $this->ip,
-			'email' => $this->email,
+			'email' => (!empty($this->email) ? $this->email : (WCF::getUser()->userID ? WCF::getUser()->email : '')),
 			'logDate' => TIME_NOW,
 			'eventClassName' => (empty($className) ? $caller['class'] : $className),
 			'eventName' => (empty($eventName) ? $caller['function'] : $eventName),
