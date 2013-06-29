@@ -18,17 +18,15 @@ class MembersListPageStopForumSpamListener implements IEventListener {
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		// Do nothing, if the module is disabled
-		if (!MODULE_STOPFORUMSPAM) {
+		// Do nothing, if the module or "Hide from members list" is disabled
+		if (!MODULE_STOPFORUMSPAM || !STOPFORUMSPAM_HIDEFROMML) {
 			return false;
 		}
 
 		// Hide all users, which are marked as spammer
-		if (STOPFORUMSPAM_HIDEFROMML) {
-			$eventObj->objectList->getConditionBuilder()->add('(SELECT userOption' . User::getUserOptionID('stopforumspam_userstatus') . '
-					FROM wcf' . WCF_N . '_user_option_value
-					WHERE userID = user_table.userID) != ?', array(2)
-			);
-		}
+		$eventObj->objectList->getConditionBuilder()->add('(SELECT userOption' . User::getUserOptionID('stopforumspam_userstatus') . '
+				FROM wcf' . WCF_N . '_user_option_value
+				WHERE userID = user_table.userID) != ?', array(2)
+		);
 	}
 }

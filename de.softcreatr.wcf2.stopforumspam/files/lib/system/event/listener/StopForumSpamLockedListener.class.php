@@ -19,16 +19,14 @@ class StopForumSpamLockedListener implements IEventListener {
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		// Do nothing, if the module is disabled
-		if (!MODULE_STOPFORUMSPAM) {
+		// Do nothing, if the module or "Enable notification" is disabled
+		if (!MODULE_STOPFORUMSPAM || !STOPFORUMSPAM_ENABLENOTIFICATION) {
 			return false;
 		}
 		
-		// "Enable notification" enabled
-		if (STOPFORUMSPAM_ENABLENOTIFICATION) {
-			if ((WCF::getUser()->userID && WCF::getUser()->stopforumspam_userstatus == 2) || WCF::getSession()->getVar('stopforumspam_userstatus') == 2) {
-				throw new StopForumSpamException();
-			}
+		// Show error message and prevent further access
+		if ((WCF::getUser()->userID && WCF::getUser()->stopforumspam_userstatus == 2) || WCF::getSession()->getVar('stopforumspam_userstatus') == 2) {
+			throw new StopForumSpamException();
 		}
 	}
 }

@@ -20,13 +20,18 @@ class RegisterFormStopForumSpamDisclaimerListener implements IEventListener {
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
+		// Do nothing, if the module or "Enable additional disclaimer" is disabled
+		if (!MODULE_STOPFORUMSPAM || !STOPFORUMSPAM_ENABLEDISCLAIMER) {
+			return false;
+		}
+		
 		// avoid misorder of disclaimer pages
 		if (REGISTER_ENABLE_DISCLAIMER && !WCF::getSession()->getVar('disclaimerAccepted')) {
 			return false;
 		}
 		
-		// check StopForumSpam disclaimer
-		if (MODULE_STOPFORUMSPAM && STOPFORUMSPAM_ENABLEDISCLAIMER && !WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
+		// Show StopForumSpam disclaimer
+		if (!WCF::getSession()->getVar('stopForumSpamDisclaimerAccepted')) {
 			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('StopForumSpamDisclaimer'));
 			exit;
 		}
