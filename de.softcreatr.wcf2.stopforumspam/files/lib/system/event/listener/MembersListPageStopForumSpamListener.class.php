@@ -24,9 +24,9 @@ class MembersListPageStopForumSpamListener implements IEventListener {
 		}
 
 		// Hide all users, which are marked as spammer
-		$eventObj->objectList->getConditionBuilder()->add('(SELECT userOption' . User::getUserOptionID('stopforumspam_userstatus') . '
+		$eventObj->objectList->getConditionBuilder()->add('userID IN (SELECT userID
 				FROM wcf' . WCF_N . '_user_option_value
-				WHERE userID = user_table.userID) != ?', array(2)
+				WHERE userOption' . User::getUserOptionID('stopforumspam_userstatus') . ' != ?)', array(2)
 		);
 	}
 }
