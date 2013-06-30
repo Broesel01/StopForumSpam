@@ -42,7 +42,7 @@
 			<inherit>1</inherit>
 		</eventlistener>
 		
-		<!-- MembersList & UsersOnlineListPage -->
+		<!-- MembersListPage -->
 		
 		<eventlistener>
 			<eventclassname>wcf\page\MembersListPage</eventclassname>
@@ -51,10 +51,12 @@
 			<environment>user</environment>
 		</eventlistener>
 		
+		<!-- UsersOnlineListPage -->
+		
 		<eventlistener>
-			<eventclassname>wcf\page\UsersOnlineList</eventclassname>
+			<eventclassname>wcf\page\UsersOnlineListPage</eventclassname>
 			<eventname>countItems</eventname>
-			<listenerclassname>wcf\system\event\listener\MembersListPageStopForumSpamListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\UsersOnlineListPageStopForumSpamListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
 		
@@ -62,7 +64,7 @@
 		
 		<eventlistener>
 			<eventclassname>wcf\page\UserPage</eventclassname>
-			<eventname>readParameters</eventname>
+			<eventname>assignVariables</eventname>
 			<listenerclassname>wcf\system\event\listener\UserPageStopForumSpamListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
