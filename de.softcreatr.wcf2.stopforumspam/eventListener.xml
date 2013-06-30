@@ -42,10 +42,17 @@
 			<inherit>1</inherit>
 		</eventlistener>
 		
-		<!-- MembersListPage -->
+		<!-- MembersList & UsersOnlineListPage -->
 		
 		<eventlistener>
 			<eventclassname>wcf\page\MembersListPage</eventclassname>
+			<eventname>countItems</eventname>
+			<listenerclassname>wcf\system\event\listener\MembersListPageStopForumSpamListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		
+		<eventlistener>
+			<eventclassname>wcf\page\UsersOnlineList</eventclassname>
 			<eventname>countItems</eventname>
 			<listenerclassname>wcf\system\event\listener\MembersListPageStopForumSpamListener</listenerclassname>
 			<environment>user</environment>
