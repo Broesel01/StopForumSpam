@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/templateListener.xsd">
+	<import>
+		<templatelistener name="javascriptInclude">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[
+			
+<!--
+Secured by StopForumSpam
+Copyright (c) 2010-2013 by Sascha Greuel
+http://www.softcreatr.de
+-->
+
+			]]></templatecode>
+		</templatelistener>
+	</import>
+</data>
