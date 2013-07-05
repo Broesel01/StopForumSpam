@@ -33,10 +33,10 @@
 		<instruction type="file">files.tar</instruction>
 
 		<!-- config -->
-		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="option">option.xml</instruction>
 		<instruction type="userOption">userOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="eventListener">eventListener.xml</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
 	</instructions>
 </package>
