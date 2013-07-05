@@ -105,7 +105,6 @@ Bitte beachten Sie, dass <em>{PAGE_TITLE|language}</em> keinerlei Einfluss auf A
 		<item name="wcf.stopforumspam.log.module_disabled"><![CDATA[Das StopForumSpam-Modul ist deaktiviert.]]></item>
 		<item name="wcf.stopforumspam.log.whitelisted"><![CDATA[Dieser Benutzer befindet sich auf Ihrer Whitelist.]]></item>
 		<item name="wcf.stopforumspam.log.checkregister_disabled"><![CDATA[Die Überprüfung der Registrierung ist deaktiviert.]]></item>
-		<item name="wcf.stopforumspam.log.alreadychecked"><![CDATA[Der Benutzer wurde bereits (mit positivem Ergebnis) überprüft.]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">

@@ -24,7 +24,7 @@
 		
 		<item name="wcf.acp.option.category.stopforumspam.scopesettings"><![CDATA[Bereichseinstellungen]]></item>
 		<item name="wcf.acp.option.stopforumspam_checkregistration"><![CDATA[Registrierung überwachen (empfohlen)]]></item>
-		<item name="wcf.acp.option.stopforumspam_checkregistration.description"><![CDATA[Aktivieren Sie diese Option, wenn Sie die Registrierung überwachen wollen.]]></item>
+		<item name="wcf.acp.option.stopforumspam_checkregistration.description"><![CDATA[Aktivieren Sie diese Option, wenn Sie die Registrierung überwachen möchten.]]></item>
 		
 		<!-- Block settings -->
 		
@@ -36,7 +36,9 @@
 		<item name="wcf.acp.option.stopforumspam_prioritizecheck"><![CDATA[Prüfung vorziehen]]></item>
 		<item name="wcf.acp.option.stopforumspam_prioritizecheck.description"><![CDATA[Standardmäßig wird die Prüfung erst nach Ausführen einer Aktion durchgeführt. Durch Aktivieren dieser Option wird (wenn möglich) die Prüfung vorgezogen. So kann beispielsweise verhindert werden, dass ein Benutzer nach seiner Registrierung in der Datenbank angelegt wird.]]></item>
 		<item name="wcf.acp.option.stopforumspam_hidefromml"><![CDATA[In Mitgliederliste verbergen (empfohlen)]]></item>
-		<item name="wcf.acp.option.stopforumspam_hidefromml.description"><![CDATA[Aktivieren Sie diese Option, wenn die als Spammer markierten Benutzer in der Mitgliederliste Ihrer Community verborgen werden sollen.]]></item>
+		<item name="wcf.acp.option.stopforumspam_hidefromml.description"><![CDATA[Aktivieren Sie diese Option, wenn die als Spammer markierten Benutzer in der Mitgliederliste Ihrer Community verbergen möchten.]]></item>
+		<item name="wcf.acp.option.stopforumspam_hidefromuol"><![CDATA[In Wer ist Online-Liste verbergen (empfohlen)]]></item>
+		<item name="wcf.acp.option.stopforumspam_hidefromuol.description"><![CDATA[Aktivieren Sie diese Option, wenn die als Spammer markierten Benutzer in der Wer ist Online-Liste Ihrer Community verbergen möchten.]]></item>
 		<item name="wcf.acp.option.stopforumspam_blockprofiles"><![CDATA[Profile blockieren (empfohlen)]]></item>
 		<item name="wcf.acp.option.stopforumspam_blockprofiles.description"><![CDATA[Aktivieren Sie diese Option, wenn die Profile der als Spammer markierten Benutzer blockiert werden sollen.]]></item>
 		
@@ -103,7 +105,6 @@ Bitte beachten Sie, dass <em>{PAGE_TITLE|language}</em> keinerlei Einfluss auf A
 		<item name="wcf.stopforumspam.log.module_disabled"><![CDATA[Das StopForumSpam-Modul ist deaktiviert.]]></item>
 		<item name="wcf.stopforumspam.log.whitelisted"><![CDATA[Dieser Benutzer befindet sich auf Ihrer Whitelist.]]></item>
 		<item name="wcf.stopforumspam.log.checkregister_disabled"><![CDATA[Die Überprüfung der Registrierung ist deaktiviert.]]></item>
-		<item name="wcf.stopforumspam.log.alreadychecked"><![CDATA[Der Benutzer wurde bereits (mit positivem Ergebnis) überprüft.]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
