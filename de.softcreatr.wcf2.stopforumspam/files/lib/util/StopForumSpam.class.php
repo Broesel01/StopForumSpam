@@ -54,14 +54,13 @@ class StopForumSpam {
 		);
 		
 		// Check, if module is enabled and if the given information is whitelisted
-		if (!MODULE_STOPFORUMSPAM) {
+		if (WCF::getUser()->userID && WCF::getUser()->stopforumspam_userstatus <> 1) {
+			return false;
+		} else if (!MODULE_STOPFORUMSPAM) {
 			$this->log(false, 'wcf.stopforumspam.log.module_disabled');
 			return false;
-		} else if ($this->isWhitelisted() /*|| !WCF::getSession()->getPermission('user.stopforumspam.enable')*/) {
+		} else if ($this->isWhitelisted()) {
 			$this->log(false, 'wcf.stopforumspam.log.whitelisted');
-			return false;
-		} else if (WCF::getUser()->userID && WCF::getUser()->stopforumspam_userstatus == 1) {
-			$this->log(false, 'wcf.stopforumspam.log.alreadychecked');
 			return false;
 		} else {
 			// Check E-Mail-Address?
