@@ -17,6 +17,10 @@
 		<requiredpackage minversion="2.0.0 Beta 4">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
 	
+	<optionalpackages>
+		<optionalpackage file="optionals/de.softcreatr.wcf2.mailverifyflag.tar">de.softcreatr.wcf2.mailverifyflag.tar</optionalpackage>
+	</optionalpackages>
+	
 	<license>
 		<license><![CDATA[Creative Commons <by-sa>]]></license>
 		<licenseURL><![CDATA[http://creativecommons.org/licenses/by-sa/3.0/]]></licenseURL>
