@@ -276,7 +276,6 @@ class StopForumSpam {
 	 */
 	private function apiRequest($apiURL) {
 		$request = new HTTPRequest($apiURL);
-		$request->addHeader('User-Agent', "HTTP.PHP (Stopforumspam; WoltLab Community Framework/" . WCF_VERSION . "; ".WCF::getLanguage()->languageCode . ")");
 		$request->execute();
 		
 		$reply = $request->getReply();
