@@ -13,7 +13,7 @@ use wcf\system\event\IEventListener;
  * @subpackage	system.event.listener
  * @category	Community Framework
  */
-class UsersOnlineListPageStopForumSpam implements IEventListener {
+class UsersOnlineListPageStopForumSpamListener implements IEventListener {
 	/**
 	 * @see	wcf\system\event\IEventListener::execute()
 	 */
